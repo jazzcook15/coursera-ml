@@ -13,7 +13,11 @@ figure; hold on;
 %
 
 
-
+pos_idx=find(y==1);
+neg_idx=find(y==0);
+plot(X(pos_idx,1),X(pos_idx,2),'k+','LineWidth',2,'MarkerSize',7);
+plot(X(neg_idx,1),X(neg_idx,2),'ko','MarkerFaceColor','y','MarkerSize',7);
+legend('Admitted','Not admitted');
 
 
 
