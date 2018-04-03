@@ -20,9 +20,8 @@ W = zeros(L_out, 1 + L_in);
 %
 
 
-
-
-
+EPSILON_INIT = 1.2e-1;
+W = EPSILON_INIT * (rand(L_out, 1 + L_in) * 2 - 1);
 
 
 
