@@ -74,6 +74,7 @@ for k=1:num_labels
   J += -( sum(log(a3(idx,k))) + sum(log(1-a3(nidx,k))) ) / m;
 end
 
+J += lambda / (2.0 * m) * (sum(Theta1(:,2:end)(:).^2)+sum(Theta2(:,2:end)(:).^2));
 
 
 
