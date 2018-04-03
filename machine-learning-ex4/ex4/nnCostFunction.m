@@ -77,6 +77,27 @@ end
 J += lambda / (2.0 * m) * (sum(Theta1(:,2:end)(:).^2)+sum(Theta2(:,2:end)(:).^2));
 
 
+for t=1:m
+  % step 1, feed-forward
+  a1 = [1 X(t,:)]';
+  z2 = Theta1*a1;
+  a2 = [1; sigmoid(z2)];
+  z3 = Theta2*a2;
+  a3 = sigmoid(z3);
+  % step 2, error of output layer
+  yk = zeros(num_labels, 1);
+  yk(y(t)) = 1;
+  d3 = a3 - yk;
+  % step 3, error of hidden layer
+  d2 = Theta2(:,2:end)'*d3.*sigmoidGradient(z2);
+  % step 4, accumulate gradient
+  Theta2_grad += d3 * a2';
+  Theta1_grad += d2 * a1';
+end
+% step 5, divide by m
+Theta2_grad /= m;
+Theta1_grad /= m;
+
 
 % -------------------------------------------------------------
 
