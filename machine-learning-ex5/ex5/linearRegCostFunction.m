@@ -25,8 +25,8 @@ hmy = h - y;
 J = (hmy' * hmy + lambda * theta(2:end)' * theta(2:end)) / (2 * m);
 
 
-
-
+grad = X' * hmy / m;
+grad(2:end) += lambda / m * theta(2:end);
 
 
 
