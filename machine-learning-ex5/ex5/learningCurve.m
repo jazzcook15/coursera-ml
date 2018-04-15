@@ -53,13 +53,32 @@ error_val   = zeros(m, 1);
 
 Xval = [ones(size(Xval, 1), 1) Xval];
 
-for i = 1:m
-    Xi = [ones(i, 1) X(1:i,:)];
-    yi = y(1:i,:);
-    theta = trainLinearReg(Xi, yi, lambda);
-    error_train(i) = linearRegCostFunction(Xi, yi, theta, 0);
-    error_val(i)   = linearRegCostFunction(Xval, yval, theta, 0);
+RAND = 0;
+
+if RAND == 1
+    count = 50;
+else
+    count = 1;
 end
+
+for i = 1:m
+    for j = 1:count
+        if RAND == 1
+            idx = randperm(m)(1:i);
+            Xi = [ones(i, 1) X(idx,:)];
+            yi = y(idx,:);
+        else
+            Xi = [ones(i, 1) X(1:i,:)];
+            yi = y(1:i,:);
+        end
+
+        theta = trainLinearReg(Xi, yi, lambda);
+        error_train(i) += linearRegCostFunction(Xi, yi, theta, 0);
+        error_val(i)   += linearRegCostFunction(Xval, yval, theta, 0);
+    end
+end
+error_train /= count;
+error_val   /= count;
 
 % =========================================================================
 
