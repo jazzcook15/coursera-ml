@@ -28,7 +28,9 @@ centroids = zeros(K, n);
 
 for k=1:K
   j = find(idx==k);
-  centroids(k,:) = mean(X(j,:));
+  if ~isempty(j)
+    centroids(k,:) = mean(X(j,:));
+  end
 end
 
 % =============================================================
