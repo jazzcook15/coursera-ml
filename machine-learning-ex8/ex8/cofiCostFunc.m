@@ -45,7 +45,9 @@ J = 1 / 2 * sum(err(R==1).^2);
 J += lambda / 2 * (sum(Theta(:).^2) + sum(X(:).^2));
 
 X_grad = (err.*R)*Theta;
+X_grad += lambda*X;
 Theta_grad = (err.*R)'*X;
+Theta_grad += lambda*Theta;
 
 % =============================================================
 
